@@ -11,7 +11,7 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+
 
 
     public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder, JwtService, jwtService){
