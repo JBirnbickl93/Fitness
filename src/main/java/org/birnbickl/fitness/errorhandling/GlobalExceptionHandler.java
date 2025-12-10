@@ -1,5 +1,6 @@
 package org.birnbickl.fitness.errorhandling;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
 import org.apache.coyote.BadRequestException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -8,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.client.HttpServerErrorException;
 
+import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -48,10 +51,36 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(apiError);
     }
 
-    // TODO: Exception, bei fehlendem Datenbankeintrag
+    // Exception, bei fehlendem Datenbankeintrag
+    @ExceptionHandler
+    public ResponseEntity<ApiError>handleEntityNotFound (EntityNotFoundException exception) {
+        List<String> errors = List.of("The requested entity was not found.");
+        ApiError apiError = new ApiError(LocalDateTime.now(), "Not found.", HttpStatus.NOT_FOUND.value(), errors);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+    // Exception, für Fehler 500
+    @ExceptionHandler
+    public ResponseEntity<ApiError> handleGenericException (Exception exception) {
+        List<String> errors = List.of(exception.getMessage());
+        ApiError apiError = new ApiError(LocalDateTime.now(), "Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR.value(), errors);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiError);
+    }
 
-    // TODO: Exception, bei bereits vergegebenem Usernamen
-    
-    // TODO: Exception, bei falschen LoginDaten
+    // Exception, bei bereits vergegebenem Usernamen
+    @ExceptionHandler
+    public ResponseEntity<ApiError> usernameAlreadyExists(UsernameAlreadyExistsException exception){
+        List<String> errors = List.of(exception.getMessage());
+        ApiError apiError = new ApiError(LocalDateTime.now(), "Username already exists.", HttpStatus.BAD_REQUEST.value(), errors);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
 
+    // Exception, bei falschen LoginDaten
+    @ExceptionHandler
+    public ResponseEntity<ApiError> invalidCredentialsException (InvalidParameterException exception) {
+        List<String> errors = List.of(exception.getMessage());
+        ApiError apiError = new ApiError(LocalDateTime.now(), "Invalid credentials.", HttpStatus.BAD_REQUEST.value(), errors);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+
+    // TODO: InvalidCredentials und UsernameAlreadyExists - Klassen anlegen
 }
