@@ -26,6 +26,7 @@ public class JwtService {
     private long jwtExpiration;
 
 
+    // Methode zur Generierung eines JWT
     public String generateToken(UserEntity user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", user.getId());
@@ -36,11 +37,13 @@ public class JwtService {
 
     }
 
+    // Methode erstellt den kryptografischen Schlüssel zum Signieren des JWT.
     private Key getSigningkey() {
         byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
-        return Key.hmacShaKeyFor(keyBytes);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
+    // Hilfsmethode für isTokenValid und extractEmail
     private Claims extractAllClaims(String token) {
         return Jwts.parserBuilder().setSigningKey(getSigningkey()).build().parseClaimsJws(token).getBody();
     }

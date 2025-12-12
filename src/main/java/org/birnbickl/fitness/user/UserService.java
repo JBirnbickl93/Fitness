@@ -1,6 +1,7 @@
 package org.birnbickl.fitness.user;
 
 import org.birnbickl.fitness.api.JwtService;
+import org.birnbickl.fitness.errorhandling.*;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,10 +12,10 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
+    private final Object jwtService;
 
 
-
-    public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder, JwtService, jwtService){
+    public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder, JwtService jwtService){
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
@@ -23,10 +24,10 @@ public class UserService implements UserDetailsService {
     // Methode um User zu erstellen bzw. Registrierung eines Nutzers
     public UserEntity createUser(String email, String password, String name){
         if (userRepo.findByEmail(email).isPresent()){
-            throw new UserNameAlreadyExistsException("Email existiert bereits!");
+            throw new UsernameAlreadyExists("Email existiert bereits!");
         } else {
-            String encPassoword = passwordEncoder.encode(password);
-            UserEntity user = new UserEntity(email, encPassoword, name);
+            String encPassword = passwordEncoder.encode(password);
+            UserEntity user = new UserEntity(email, encPassword, name);
             UserEntity savedUser = userRepo.save(user);
             return savedUser;
         }
@@ -36,7 +37,7 @@ public class UserService implements UserDetailsService {
         Optional<UserEntity> userOptional = userRepo.findByEmail(email);
 
         if (userOptional.isEmpty()){
-            throw new InvalidCredentialsExpception("Invalid Credentials!");
+            throw new InvalidCredentialsException("Invalid Credentials!");
         }
 
         UserEntity user = userOptional.get();
