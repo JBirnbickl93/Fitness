@@ -2,7 +2,9 @@ package org.birnbickl.fitness.user;
 
 import org.birnbickl.fitness.api.JwtService;
 import org.birnbickl.fitness.errorhandling.*;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
-    private final Object jwtService;
+    private final JwtService jwtService;
 
 
     public UserService(UserRepository userRepo, PasswordEncoder passwordEncoder, JwtService jwtService){
@@ -32,16 +34,25 @@ public class UserService implements UserDetailsService {
             return savedUser;
         }
     }
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return (UserDetails) userRepo.findByEmail(email)
+        .orElseThrow(()->new UsernameNotFoundException("Username not found!"));
+    }
+
 
     public String loginUser(String email, String password){
-        Optional<UserEntity> userOptional = userRepo.findByEmail(email);
+        email = email.trim().toLowerCase();
 
-        if (userOptional.isEmpty()){
+        UserEntity user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new InvalidCredentialsException("Invalid credentials!"));
+
+        if(!user.isEnabled()){
             throw new InvalidCredentialsException("Invalid Credentials!");
         }
 
-        UserEntity user = userOptional.get();
-        if(!passwordEncoder.matches(password, user.getPassword())){
+
+        if(!passwordEncoder.matches(password, user.getPasswordHash())){
             throw new InvalidCredentialsException("Invalid Credentials!");
         }
         return jwtService.generateToken(user);

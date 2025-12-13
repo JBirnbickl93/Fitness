@@ -15,7 +15,7 @@ public class UserEntity {
     private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String passwordHash;
 
 
     // Anzeigename
@@ -30,7 +30,7 @@ public class UserEntity {
 
     public UserEntity(String email, String password, String name) {
         this.email = email;
-        this.password = password;
+        this.passwordHash = password;
         this.name = name;
     }
 
@@ -46,5 +46,11 @@ public class UserEntity {
         return email;
     }
 
+    public String getPasswordHash() {
+        return passwordHash;
+    }
 
+    public boolean isEnabled() {
+        return false;
+    }
 }
