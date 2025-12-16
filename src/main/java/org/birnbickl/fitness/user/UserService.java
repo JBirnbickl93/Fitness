@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepo;
@@ -25,14 +23,16 @@ public class UserService implements UserDetailsService {
 
     // Methode um User zu erstellen bzw. Registrierung eines Nutzers
     public UserEntity createUser(String email, String password, String name){
+        email = email.trim().toLowerCase();
         if (userRepo.findByEmail(email).isPresent()){
-            throw new UsernameAlreadyExists("Email existiert bereits!");
-        } else {
+            throw new EmailAlreadyExistsException("Email existiert bereits!");
+        }
+
             String encPassword = passwordEncoder.encode(password);
             UserEntity user = new UserEntity(email, encPassword, name);
             UserEntity savedUser = userRepo.save(user);
             return savedUser;
-        }
+
     }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

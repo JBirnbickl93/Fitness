@@ -1,10 +1,8 @@
 package org.birnbickl.fitness.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
 public class UserEntity {
 
     @Id
@@ -28,9 +26,9 @@ public class UserEntity {
     private Integer birthYear;
     private String gender; // "male, female, other"
 
-    public UserEntity(String email, String password, String name) {
+    public UserEntity(String email, String passwordHash, String name) {
         this.email = email;
-        this.passwordHash = password;
+        this.passwordHash = passwordHash;
         this.name = name;
     }
 
@@ -38,7 +36,7 @@ public class UserEntity {
         super();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -50,7 +48,11 @@ public class UserEntity {
         return passwordHash;
     }
 
+    public String getNickName() {
+        return name;
+    }
+
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
