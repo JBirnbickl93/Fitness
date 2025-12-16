@@ -20,10 +20,17 @@ public class UserAuthController {
         this.userService = userService;
     }
 
+    // Registrierungs-Methode
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistration user){
         UserEntity newUser = userService.createUser(user.getEmail(), user.getPassword(), user.getNickName());
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
+    }
 
+    // Login-Methode
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@Valid @RequestBody UserLoginRequest user){
+        String token = userService.loginUser(user.getEmail(), user.getPassword());
+        return ResponseEntity.ok().body(token);
     }
 }
