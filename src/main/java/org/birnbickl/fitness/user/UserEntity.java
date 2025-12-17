@@ -52,6 +52,10 @@ public class UserEntity {
         return name;
     }
 
+    public String getRole() {
+        return role;
+    }
+
     public boolean isEnabled() {
         return true;
     }
