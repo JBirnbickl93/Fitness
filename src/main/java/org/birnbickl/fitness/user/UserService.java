@@ -2,14 +2,12 @@ package org.birnbickl.fitness.user;
 
 import org.birnbickl.fitness.api.JwtService;
 import org.birnbickl.fitness.errorhandling.*;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService  {
     private final UserRepository userRepo;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
@@ -22,22 +20,16 @@ public class UserService implements UserDetailsService {
     }
 
     // Methode um User zu erstellen bzw. Registrierung eines Nutzers
-    public UserEntity createUser(String email, String password, String name){
+    public UserEntity createUser(String email, String password, String name) {
         email = email.trim().toLowerCase();
-        if (userRepo.findByEmail(email).isPresent()){
+        if (userRepo.findByEmail(email).isPresent()) {
             throw new EmailAlreadyExistsException("Email existiert bereits!");
         }
 
-            String encPassword = passwordEncoder.encode(password);
-            UserEntity user = new UserEntity(email, encPassword, name);
-            UserEntity savedUser = userRepo.save(user);
-            return savedUser;
-
-    }
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return (UserDetails) userRepo.findByEmail(email)
-        .orElseThrow(()->new UsernameNotFoundException("Username not found!"));
+        String encPassword = passwordEncoder.encode(password);
+        UserEntity user = new UserEntity(email, encPassword, name);
+        UserEntity savedUser = userRepo.save(user);
+        return savedUser;
     }
 
 

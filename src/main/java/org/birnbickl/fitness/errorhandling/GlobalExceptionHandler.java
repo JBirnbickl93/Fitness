@@ -2,6 +2,7 @@ package org.birnbickl.fitness.errorhandling;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +42,9 @@ public class GlobalExceptionHandler {
 
     // Exception, für Datenbank-Constraint Verletzungen
     @ExceptionHandler
-    public ResponseEntity<ApiError> handleConstraintViolation (ConstraintViolation exception) {
-        List<String> errors = exception.getConstraintViolations().stream().map(constraintViolation.getMessage())
+    public ResponseEntity<ApiError> handleConstraintViolation(ConstraintViolationException exception) {
+        List<String> errors = exception.getConstraintViolations().stream()
+                .map(ConstraintViolation::getMessage)
                 .toList();
         ApiError apiError = new ApiError(LocalDateTime.now(), "Constraint violation", HttpStatus.BAD_REQUEST.value(), errors);
         return ResponseEntity.badRequest().body(apiError);
