@@ -1,3 +1,6 @@
+![CI](https://github.com/JBirnbickl93/fitness/actions/workflows/ci.yml/badge.svg)
+
+
 ___
 ## ** WORK IN PROGRESS **
 ** Subject to change, not final yet. **
@@ -10,7 +13,7 @@ ___
 - [x] Benutzerregistrierung & Anmeldung (JWT, stateless)
 - [x] Request-Validierung
 - [x] Globale Fehlerbehandlung (@RestControllerAdvice)
-- [x] Passwort-Hashing (BCrypt)]
+- [x] Passwort-Hashing (BCrypt)
 
 ### Training
 - [ ] Erstellung und Verwaltung von Trainingsplänen
@@ -36,8 +39,8 @@ ___
 - **Testing**: JUnit, Mockito
 
 ## CI/CD (geplant)
-- [ ] CI: GitHub Actions (Build + Tests bei jedem Push)
-- [ ] Docker: Imgae Build in CI
+- [x] CI: GitHub Actions (Build + Tests bei jedem Push)
+- [ ] Docker: Image Build in CI
 - [ ] Security: Dependabot / Dependency-Scans
 - [ ] CD: optionales Deployment
 
