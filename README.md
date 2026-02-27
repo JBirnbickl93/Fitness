@@ -10,10 +10,15 @@ ___
 
 ## Geplante Features
 ### Core
-- [x] Benutzerregistrierung & Anmeldung (JWT, stateless)
-- [x] Request-Validierung
-- [x] Globale Fehlerbehandlung (@RestControllerAdvice)
-- [x] Passwort-Hashing (BCrypt)
+- ✅ Benutzerregistrierung & Anmeldung (JWT, stateless)
+- ✅ Request-Validierung
+- ✅ Globale Fehlerbehandlung (@RestControllerAdvice)
+- ✅ Passwort-Hashing (BCrypt)
+
+### Qualitätssicherung
+- ✅ CI mit GitHub Actions (Build + Tests bei jedem Push / PR)
+- ✅ Integrationstests für Auth-Flow (Register → Login → Token → geschützter Endpunkt)
+- ✅ In-Memory-Datenbank (H2) für isolierte Testumgebung
 
 ### Training
 - [ ] Erstellung und Verwaltung von Trainingsplänen
@@ -38,8 +43,8 @@ ___
 - **Deployment**: Containierisierung mit Docker
 - **Testing**: JUnit, Mockito
 
-## CI/CD (geplant)
-- [x] CI: GitHub Actions (Build + Tests bei jedem Push)
+## CI/CD Pipeline
+- ✅ CI: GitHub Actions (Build + Tests bei jedem Push)
 - [ ] Docker: Image Build in CI
 - [ ] Security: Dependabot / Dependency-Scans
 - [ ] CD: optionales Deployment
