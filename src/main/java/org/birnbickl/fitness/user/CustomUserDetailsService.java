@@ -1,5 +1,6 @@
 package org.birnbickl.fitness.user;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,5 +27,16 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .password(user.getPasswordHash())
                 .authorities("ROLE_" + user.getRole())
                 .build();
+    }
+
+
+    public String getNickname(String email) {
+        email = email.trim().toLowerCase();
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("Username not found!"));
+        return user.getNickName();
+    }
+
+    public String getNickname() {
+        return getNickname(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 }

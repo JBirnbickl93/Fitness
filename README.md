@@ -7,8 +7,11 @@ ___
 
 ## Geplante Features
 ### Core
-- [ ] Benutzerregistrierung & Anmeldung
-- [ ] Fehlerbehandlung & Validierung
+- [x] Benutzerregistrierung & Anmeldung (JWT, stateless)
+- [x] Request-Validierung
+- [x] Globale Fehlerbehandlung (@RestControllerAdvice)
+- [x] Passwort-Hashing (BCrypt)]
+
 ### Training
 - [ ] Erstellung und Verwaltung von Trainingsplänen
 - [ ] Logging von Trainingseinheiten (Übungen, Sätze, Wiederholungen, Gewichte)
@@ -66,6 +69,9 @@ Request (JSON):
 Response (JSON):
 ```json
 {
-"token": eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoidGVzdG1haWxAc2VydmVyLmRlIiwiaWF0IjoxNzcyMTEwMTUxLCJleHAiOjE3NzIxOTY1NTF9.PEa2j4rEu9m9WLYsjqAfh65mpW8kALYBA97zwAErezU
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoidGVzdG1haWxAc2VydmVyLmRlIiwiaWF0IjoxNzcyMTEyNjk3LCJleHAiOjE3NzIxOTkwOTd9.a2jDPENgSiuaS7zwh-nx0q144CAQMyM827kBw-lo1Ao"
 }
 ```
+
+**GET** /api/user/me (Testendpunkt)  
+→ Gibt "Hello {username}!" zurück, wenn der JWT-Token korrekt ist, ansonsten 401 Unauthorized
