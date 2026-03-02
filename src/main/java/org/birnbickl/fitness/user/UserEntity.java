@@ -17,7 +17,7 @@ public class UserEntity {
 
 
     // Anzeigename
-    private String name;
+    private String username;
 
     @Column(nullable = false)
     private String role = "USER";
@@ -26,10 +26,10 @@ public class UserEntity {
     private Integer birthYear;
     private String gender; // "male, female, other"
 
-    public UserEntity(String email, String passwordHash, String name) {
+    public UserEntity(String email, String passwordHash, String username) {
         this.email = email;
         this.passwordHash = passwordHash;
-        this.name = name;
+        this.username = username;
     }
 
     public UserEntity(){
@@ -48,8 +48,8 @@ public class UserEntity {
         return passwordHash;
     }
 
-    public String getNickName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public String getRole() {

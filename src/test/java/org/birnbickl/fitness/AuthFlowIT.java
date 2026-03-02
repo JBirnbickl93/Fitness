@@ -33,15 +33,15 @@ public class AuthFlowIT {
 
         String email = "tester@example.com";
         String password = "password123456";
-        String nickName = "Tester";
+        String username = "Tester";
 
 
         // 1. Registrierung , sollte 201 Created zurückgeben
         MvcResult result = mockMvc.perform(post("/api/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
-                        {"email": "%s", "password": "%s", "nickName": "Tester"}
-                        """.formatted(email, password, nickName)))
+                        {"email": "%s", "password": "%s", "username": "Tester"}
+                        """.formatted(email, password, username)))
                 .andDo(print())
                 .andExpect(status().isCreated()).andReturn();
 
@@ -63,7 +63,7 @@ public class AuthFlowIT {
         mockMvc.perform(get("/api/user/me"))
                 .andExpect(status().isUnauthorized());
 
-        // 4. Zugriff auf geschützten Endpunkt MIT Token, sollte 200 OK zurückgeben und ein "Hello Nickname" enthalten
+        // 4. Zugriff auf geschützten Endpunkt MIT Token, sollte 200 OK zurückgeben und ein "Hello Username" enthalten
         mockMvc.perform(get("/api/user/me")
                 .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())

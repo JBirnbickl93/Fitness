@@ -13,13 +13,13 @@ public class UserRegistration {
     private String password;
 
     @NotBlank(message = "Username darf nicht leer sein!")
-    private String nickName;
+    private String username;
 
 
-    public UserRegistration(String email, String password, String nickName) {
+    public UserRegistration(String email, String password, String username) {
         this.email = email;
         this.password = password;
-        this.nickName = nickName;
+        this.username = username;
     }
 
     public UserRegistration() {}
@@ -33,6 +33,6 @@ public class UserRegistration {
         return password;
     }
     public void setPassword(String password) {this.password = password;}
-    public String getNickName() {return nickName;}
-    public void setNickName(String nickName) {this.nickName = nickName;}
+    public String getUsername() {return username;}
+    public void setUsername(String username) {this.username = username;}
 }

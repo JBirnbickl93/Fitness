@@ -16,7 +16,7 @@ public class UserController {
 
     @GetMapping("/api/user/me")
     public ResponseEntity<String> showCredentials(Authentication authentication) {
-        String nickname = userDetailsService.getNickname(authentication.getName());
-        return ResponseEntity.ok("Hello " + nickname + "!");
+        String username = userDetailsService.getUsername(authentication.getName());
+        return ResponseEntity.ok("Hello " + username + "!");
     }
 }

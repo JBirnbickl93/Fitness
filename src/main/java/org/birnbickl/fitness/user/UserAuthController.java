@@ -25,7 +25,7 @@ public class UserAuthController {
     // Registrierungs-Methode
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistration user){
-        UserEntity newUser = userService.createUser(user.getEmail(), user.getPassword(), user.getNickName());
+        UserEntity newUser = userService.createUser(user.getEmail(), user.getPassword(), user.getUsername());
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
     }
 

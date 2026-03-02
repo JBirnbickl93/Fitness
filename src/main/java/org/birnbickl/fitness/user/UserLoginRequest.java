@@ -12,7 +12,7 @@ public class UserLoginRequest {
     @Size(min = 8, message = "Passwort muss mindestens 8 Zeichen lang sein!")
     private String password;
 
-    public UserLoginRequest(String email, String password, String nickName) {
+    public UserLoginRequest(String email, String password, String Username) {
         this.email = email;
         this.password = password;
     }
