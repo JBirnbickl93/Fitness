@@ -9,11 +9,9 @@ public class SetEntryEntity {
     @GeneratedValue
     private long id;
 
-
-
     @ManyToOne
     @JoinColumn(name = "workout_entry_id")
-    private WorkoutEntryEntity workoutEntryEntity;
+    private WorkoutEntryEntity workoutEntry;
 
     private int setNumber;
     private int repetitions;
@@ -22,19 +20,19 @@ public class SetEntryEntity {
 
     protected SetEntryEntity() {}
 
-    public SetEntryEntity(WorkoutEntryEntity workoutEntryEntity, int setNumber, int repetitions, double weight) {
-        this.workoutEntryEntity = workoutEntryEntity;
+    public SetEntryEntity(WorkoutEntryEntity workoutEntry, int setNumber, int repetitions, double weight) {
+        this.workoutEntry = workoutEntry;
         this.setNumber = setNumber;
         this.repetitions = repetitions;
         this.weight = weight;
     }
 
     public WorkoutEntryEntity getWorkoutEntry() {
-        return workoutEntryEntity;
+        return workoutEntry;
     }
 
     public void setWorkoutEntry(WorkoutEntryEntity workoutEntryEntity) {
-        this.workoutEntryEntity = workoutEntryEntity;
+        this.workoutEntry = workoutEntryEntity;
     }
 
     public int getSetNumber() {

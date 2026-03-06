@@ -22,7 +22,7 @@ public class WorkoutEntryEntity {
     @JoinColumn(name = "workout_id")
     private WorkoutEntity workout;
 
-    @OneToMany(mappedBy = "workoutEntry", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "workoutEntryEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SetEntryEntity> sets = new ArrayList<>();
 
     protected WorkoutEntryEntity() {
