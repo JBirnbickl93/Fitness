@@ -1,5 +1,6 @@
-package org.birnbickl.fitness.user;
+package org.birnbickl.fitness.user.repository;
 
+import org.birnbickl.fitness.user.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

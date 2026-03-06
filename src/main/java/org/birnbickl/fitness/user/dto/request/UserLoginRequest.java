@@ -1,4 +1,4 @@
-package org.birnbickl.fitness.user;
+package org.birnbickl.fitness.user.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

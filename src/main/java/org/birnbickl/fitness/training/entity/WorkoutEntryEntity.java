@@ -1,4 +1,4 @@
-package org.birnbickl.fitness.training;
+package org.birnbickl.fitness.training.entity;
 
 import jakarta.persistence.*;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class WorkoutEntry {
+public class WorkoutEntryEntity {
 
     @Id
     @GeneratedValue
@@ -23,12 +23,12 @@ public class WorkoutEntry {
     private WorkoutEntity workout;
 
     @OneToMany(mappedBy = "workoutEntry", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SetEntry> sets = new ArrayList<>();
+    private List<SetEntryEntity> sets = new ArrayList<>();
 
-    protected WorkoutEntry() {
+    protected WorkoutEntryEntity() {
     }
 
-    public WorkoutEntry(ExerciseEntity exercise) {
+    public WorkoutEntryEntity(ExerciseEntity exercise) {
         this.exercise = exercise;
     }
 
@@ -52,18 +52,18 @@ public class WorkoutEntry {
         this.workout = workout;
     }
 
-    public List<SetEntry> getSets() {
+    public List<SetEntryEntity> getSets() {
         if (this.sets == null) {
             this.sets = new ArrayList<>();
         }
         return this.sets;
     }
 
-    public void addSet(SetEntry setEntry) {
+    public void addSet(SetEntryEntity setEntryEntity) {
         if (this.sets == null) {
             this.sets = new ArrayList<>();
         }
-        setEntry.setWorkoutEntry(this);
-        this.sets.add(setEntry);
+        setEntryEntity.setWorkoutEntry(this);
+        this.sets.add(setEntryEntity);
     }
 }

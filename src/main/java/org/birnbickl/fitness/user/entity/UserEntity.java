@@ -1,4 +1,4 @@
-package org.birnbickl.fitness.user;
+package org.birnbickl.fitness.user.entity;
 
 import jakarta.persistence.*;
 

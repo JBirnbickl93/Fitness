@@ -1,7 +1,7 @@
-package org.birnbickl.fitness.training;
+package org.birnbickl.fitness.training.entity;
 
 import jakarta.persistence.*;
-import org.birnbickl.fitness.user.UserEntity;
+import org.birnbickl.fitness.user.entity.UserEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class WorkoutEntity {
     private UserEntity user;
 
     @OneToMany(mappedBy = "workout", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkoutEntry> workoutEntries = new ArrayList<>();
+    private List<WorkoutEntryEntity> workoutEntries = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -32,25 +32,25 @@ public class WorkoutEntity {
         this.workoutName = workoutName;
     }
 
-    public List<WorkoutEntry> getWorkoutEntries() {
+    public List<WorkoutEntryEntity> getWorkoutEntries() {
         if (this.workoutEntries == null) {
             this.workoutEntries = new ArrayList<>();
         }
         return this.workoutEntries;
     }
 
-    public void addWorkoutEntry(WorkoutEntry workoutEntry) {
+    public void addWorkoutEntry(WorkoutEntryEntity workoutEntryEntity) {
         if (this.workoutEntries == null) {
             this.workoutEntries = new ArrayList<>();
         }
-        workoutEntry.setWorkout(this);
-        this.workoutEntries.add(workoutEntry);
+        workoutEntryEntity.setWorkout(this);
+        this.workoutEntries.add(workoutEntryEntity);
     }
 
-    public void removeWorkoutEntry(WorkoutEntry workoutEntry) {
+    public void removeWorkoutEntry(WorkoutEntryEntity workoutEntryEntity) {
         if (this.workoutEntries != null) {
-            this.workoutEntries.remove(workoutEntry);
+            this.workoutEntries.remove(workoutEntryEntity);
         }
-        workoutEntry.setWorkout(null);
+        workoutEntryEntity.setWorkout(null);
     }
 }

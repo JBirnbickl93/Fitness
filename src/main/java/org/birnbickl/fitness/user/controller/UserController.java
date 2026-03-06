@@ -1,5 +1,6 @@
-package org.birnbickl.fitness.user;
+package org.birnbickl.fitness.user.controller;
 
+import org.birnbickl.fitness.user.service.CustomUserDetailsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;

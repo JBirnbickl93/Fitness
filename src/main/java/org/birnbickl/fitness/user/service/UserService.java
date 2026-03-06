@@ -1,8 +1,10 @@
-package org.birnbickl.fitness.user;
+package org.birnbickl.fitness.user.service;
 
-import org.birnbickl.fitness.api.JwtService;
+import org.birnbickl.fitness.security.JwtService;
 import org.birnbickl.fitness.errorhandling.*;
 
+import org.birnbickl.fitness.user.entity.UserEntity;
+import org.birnbickl.fitness.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

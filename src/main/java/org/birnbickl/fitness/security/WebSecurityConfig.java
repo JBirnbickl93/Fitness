@@ -1,4 +1,4 @@
-package org.birnbickl.fitness.api;
+package org.birnbickl.fitness.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +28,7 @@ public class WebSecurityConfig {
                .authorizeHttpRequests((auth-> auth
                        .requestMatchers("/api/auth/**").permitAll()
                        .requestMatchers("/api/user/**").authenticated()
+                       .requestMatchers("/api/workout/**").authenticated()
                        .anyRequest().authenticated()))
                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                .build();

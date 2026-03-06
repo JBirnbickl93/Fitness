@@ -1,9 +1,9 @@
-package org.birnbickl.fitness.training;
+package org.birnbickl.fitness.training.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-public class SetEntry {
+public class SetEntryEntity {
 
     @Id
     @GeneratedValue
@@ -13,28 +13,28 @@ public class SetEntry {
 
     @ManyToOne
     @JoinColumn(name = "workout_entry_id")
-    private WorkoutEntry workoutEntry;
+    private WorkoutEntryEntity workoutEntryEntity;
 
     private int setNumber;
     private int repetitions;
     private double weight;
 
 
-    protected SetEntry() {}
+    protected SetEntryEntity() {}
 
-    public SetEntry(WorkoutEntry workoutEntry, int setNumber, int repetitions, double weight) {
-        this.workoutEntry = workoutEntry;
+    public SetEntryEntity(WorkoutEntryEntity workoutEntryEntity, int setNumber, int repetitions, double weight) {
+        this.workoutEntryEntity = workoutEntryEntity;
         this.setNumber = setNumber;
         this.repetitions = repetitions;
         this.weight = weight;
     }
 
-    public WorkoutEntry getWorkoutEntry() {
-        return workoutEntry;
+    public WorkoutEntryEntity getWorkoutEntry() {
+        return workoutEntryEntity;
     }
 
-    public void setWorkoutEntry(WorkoutEntry workoutEntry) {
-        this.workoutEntry = workoutEntry;
+    public void setWorkoutEntry(WorkoutEntryEntity workoutEntryEntity) {
+        this.workoutEntryEntity = workoutEntryEntity;
     }
 
     public int getSetNumber() {

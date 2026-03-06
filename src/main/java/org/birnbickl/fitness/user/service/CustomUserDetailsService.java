@@ -1,7 +1,8 @@
-package org.birnbickl.fitness.user;
+package org.birnbickl.fitness.user.service;
 
 import org.birnbickl.fitness.errorhandling.EmailNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.birnbickl.fitness.user.entity.UserEntity;
+import org.birnbickl.fitness.user.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

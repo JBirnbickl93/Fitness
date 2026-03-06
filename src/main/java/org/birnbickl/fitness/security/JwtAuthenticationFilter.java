@@ -1,10 +1,10 @@
-package org.birnbickl.fitness.api;
+package org.birnbickl.fitness.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.birnbickl.fitness.user.CustomUserDetailsService;
+import org.birnbickl.fitness.user.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 

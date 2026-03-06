@@ -1,8 +1,8 @@
-package org.birnbickl.fitness.api;
+package org.birnbickl.fitness.security;
 
 
 
-import org.birnbickl.fitness.user.UserEntity;
+import org.birnbickl.fitness.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.Jwts;
+
 @Service
 public class JwtService {
 

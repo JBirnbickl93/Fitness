@@ -1,4 +1,4 @@
-package org.birnbickl.fitness.api;
+package org.birnbickl.fitness.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

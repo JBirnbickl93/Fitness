@@ -1,7 +1,11 @@
-package org.birnbickl.fitness.user;
+package org.birnbickl.fitness.user.controller;
 
 
 import jakarta.validation.Valid;
+import org.birnbickl.fitness.user.entity.UserEntity;
+import org.birnbickl.fitness.user.service.UserService;
+import org.birnbickl.fitness.user.dto.request.UserLoginRequest;
+import org.birnbickl.fitness.user.dto.request.UserRegistrationRequest;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +28,7 @@ public class UserAuthController {
 
     // Registrierungs-Methode
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistration user){
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationRequest user){
         UserEntity newUser = userService.createUser(user.getEmail(), user.getPassword(), user.getUsername());
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
     }

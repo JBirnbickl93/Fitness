@@ -1,4 +1,4 @@
-package org.birnbickl.fitness.training;
+package org.birnbickl.fitness.training.entity;
 
 import jakarta.persistence.*;
 
