@@ -35,6 +35,12 @@ Das Trainingsmodell ist hierarchisch aufgebaut und trennt:
 - WorkoutEntries (Übungen innerhalb eines Workouts)
 - SetEntries (einzelne Sätze mit Gewicht und Wiederholungen)
 
+### Domain Überblick
+- Ein Benutzer kann mehrere Workouts haben.
+- Ein Workout besteht aus mehreren WorkoutEntries.
+- Ein WorkoutEntry referenziert eine Exercise.
+- Ein WorkoutEntry hat mehrere SetEntries.
+
 ```mermaid
 erDiagram
     USER ||--o{ WORKOUT : owns
