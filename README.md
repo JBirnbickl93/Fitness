@@ -6,33 +6,16 @@ ___
 ** Subject to change, not final yet. **
 ___
 ## Fitness-App
+
+Spring Boot Backend für eine Fitness-App, die folgende Funktionen bietet:
+- Trainingserstellung und -verwaltung
+- Logging von Trainingseinheiten (Übungen, Sätze, Wiederholungen, Gewichte
+- Progression / Auswertung (z.B. Volumen, Trends, Empfehlungen)
+- Benutzerregistrierung & Anmeldung (JWT, stateless)
+- Kalorientracking
+- Körperwerte-Tracking (Gewicht, Umfänge)
+- 
 ___
-
-## Geplante Features
-### Core
-- ✅ Benutzerregistrierung & Anmeldung (JWT, stateless)
-- ✅ Request-Validierung
-- ✅ Globale Fehlerbehandlung (@RestControllerAdvice)
-- ✅ Passwort-Hashing (BCrypt)
-
-### Qualitätssicherung
-- ✅ CI mit GitHub Actions (Build + Tests bei jedem Push / PR)
-- ✅ Integrationstests für Auth-Flow (Register → Login → Token → geschützter Endpunkt)
-- ✅ In-Memory-Datenbank (H2) für isolierte Testumgebung
-
-### Training
-- [ ] Erstellung und Verwaltung von Trainingsplänen
-- [ ] Logging von Trainingseinheiten (Übungen, Sätze, Wiederholungen, Gewichte)
-- [ ] Progression / Auswertung (z.B. Volumen, Trends, Empfehlungen)
-### Ernährung
-- [ ] Integration Kalorienzähler
-- [ ] Datenbankanbindung für Nahrungsinformationen (Barcode, Nährwerte, Makro-Tracking)
-### Körper & Aktivität
-- [ ] Körperwerte-Tracking (Gewicht, Umfänge)
-- [ ] Wearable-Integration (Aktivität → Kalorienzähler anpassen)
-### Visualisierung
-- [ ] Fortschrittsvisualisierung (Diagramme, Statistiken)
-
 
 ## Technologien
 - **Backend**: Java, Spring Boot (REST API)
@@ -43,11 +26,24 @@ ___
 - **Deployment**: Containierisierung mit Docker
 - **Testing**: JUnit, Mockito
 
-## CI/CD Pipeline
-- ✅ CI: GitHub Actions (Build + Tests bei jedem Push)
-- [ ] Docker: Image Build in CI
-- [ ] Security: Dependabot / Dependency-Scans
-- [ ] CD: optionales Deployment
+
+## Domain Model
+
+Das Trainingsmodell ist hierarchisch aufgebaut und trennt:
+- Workouts (Trainingseinheiten)
+- Exercises (Übungsstammdaten)
+- WorkoutEntries (Übungen innerhalb eines Workouts)
+- SetEntries (einzelne Sätze mit Gewicht und Wiederholungen)
+
+```mermaid
+```mermaid
+erDiagram
+    USER ||--o{ WORKOUT : owns
+    WORKOUT ||--o{ WORKOUT_ENTRY : contains
+    WORKOUT_ENTRY }o--|| EXERCISE : references
+    WORKOUT_ENTRY ||--o{ SET_ENTRY : has
+```
+
 
 ## Auth Flow (Register → Login → Token)
 1) Register
@@ -83,3 +79,38 @@ Response (JSON):
 
 **GET** /api/user/me (Testendpunkt)  
 → Gibt "Hello {username}!" zurück, wenn der JWT-Token korrekt ist, ansonsten 401 Unauthorized
+
+
+## Geplante Features
+### Core
+- ✅ Benutzerregistrierung & Anmeldung (JWT, stateless)
+- ✅ Request-Validierung
+- ✅ Globale Fehlerbehandlung (@RestControllerAdvice)
+- ✅ Passwort-Hashing (BCrypt)
+
+### Qualitätssicherung
+- ✅ CI mit GitHub Actions (Build + Tests bei jedem Push / PR)
+- ✅ Integrationstests für Auth-Flow (Register → Login → Token → geschützter Endpunkt)
+- ✅ In-Memory-Datenbank (H2) für isolierte Testumgebung
+
+### Training
+- [ ] Erstellung und Verwaltung von Trainingsplänen
+- [ ] Logging von Trainingseinheiten (Übungen, Sätze, Wiederholungen, Gewichte)
+- [ ] Progression / Auswertung (z.B. Volumen, Trends, Empfehlungen)
+### Ernährung
+- [ ] Integration Kalorienzähler
+- [ ] Datenbankanbindung für Nahrungsinformationen (Barcode, Nährwerte, Makro-Tracking)
+### Körper & Aktivität
+- [ ] Körperwerte-Tracking (Gewicht, Umfänge)
+- [ ] Wearable-Integration (Aktivität → Kalorienzähler anpassen)
+### Visualisierung
+- [ ] Fortschrittsvisualisierung (Diagramme, Statistiken)
+
+
+
+
+## CI/CD Pipeline
+- ✅ CI: GitHub Actions (Build + Tests bei jedem Push)
+- [ ] Docker: Image Build in CI
+- [ ] Security: Dependabot / Dependency-Scans
+- [ ] CD: optionales Deployment
