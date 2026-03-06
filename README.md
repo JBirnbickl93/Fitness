@@ -14,7 +14,7 @@ Spring Boot Backend für eine Fitness-App, die folgende Funktionen bietet:
 - Benutzerregistrierung & Anmeldung (JWT, stateless)
 - Kalorientracking
 - Körperwerte-Tracking (Gewicht, Umfänge)
-- 
+
 ___
 
 ## Technologien
