@@ -36,7 +36,6 @@ Das Trainingsmodell ist hierarchisch aufgebaut und trennt:
 - SetEntries (einzelne Sätze mit Gewicht und Wiederholungen)
 
 ```mermaid
-```mermaid
 erDiagram
     USER ||--o{ WORKOUT : owns
     WORKOUT ||--o{ WORKOUT_ENTRY : contains
