@@ -3,6 +3,7 @@ package org.birnbickl.fitness.training.service;
 import org.birnbickl.fitness.errorhandling.WorkoutNotFoundException;
 import org.birnbickl.fitness.training.dto.request.CreateSetRequest;
 import org.birnbickl.fitness.training.dto.request.CreateWorkoutRequest;
+import org.birnbickl.fitness.training.dto.response.WorkoutResponse;
 import org.birnbickl.fitness.training.entity.SetEntryEntity;
 import org.birnbickl.fitness.training.entity.WorkoutEntity;
 import org.birnbickl.fitness.training.entity.WorkoutEntryEntity;
@@ -10,6 +11,7 @@ import org.birnbickl.fitness.training.repository.WorkoutEntryRepository;
 import org.birnbickl.fitness.training.repository.WorkoutRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -61,13 +63,18 @@ public class WorkoutService {
                 new WorkoutNotFoundException("Workout mit ID " + id + " nicht gefunden!"));
     }
 
-    public <List>WorkoutEntity getAllWorkouts(){
-        return (WorkoutEntity) workoutRepository.findAll();
+    public List<WorkoutResponse> getAllWorkouts(){
+        return workoutRepository.findAll()
+                .stream()
+                .map(workout -> new WorkoutResponse(workout.getId(), workout.getWorkoutName()))
+                .toList();
     }
 
-    public WorkoutEntity getSingleWorkoutById(Long id){
-        return workoutRepository.findById(id).orElseThrow(() ->
-                new WorkoutNotFoundException("Workout nicht gefunden!"));
+    public WorkoutResponse getSingleWorkoutById(Long id){
+        WorkoutEntity workout = workoutRepository.findById(id)
+                .orElseThrow(() -> new WorkoutNotFoundException("Workout nicht gefunden!"));
+
+        return new WorkoutResponse(workout.getId(), workout.getWorkoutName());
     }
 
 }
