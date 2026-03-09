@@ -39,13 +39,7 @@ public class WorkoutEntity {
         return this.workoutEntries;
     }
 
-    public void addWorkoutEntry(WorkoutEntryEntity workoutEntryEntity) {
-        if (this.workoutEntries == null) {
-            this.workoutEntries = new ArrayList<>();
-        }
-        workoutEntryEntity.setWorkout(this);
-        this.workoutEntries.add(workoutEntryEntity);
-    }
+
 
     public void removeWorkoutEntry(WorkoutEntryEntity workoutEntryEntity) {
         if (this.workoutEntries != null) {
@@ -53,4 +47,11 @@ public class WorkoutEntity {
         }
         workoutEntryEntity.setWorkout(null);
     }
+
+    public void addWorkoutEntry(WorkoutEntryEntity entry){
+        workoutEntries.add(entry);
+        entry.setWorkout(this);
+    }
+
+
 }

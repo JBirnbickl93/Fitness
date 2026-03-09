@@ -59,7 +59,7 @@ Request (JSON):
 {
     "email": "testmail@server.de",
     "password": "testpassword123",
-    "nickName": "tester"
+    "username": "tester"
 }
 ```
 Response: 201 Created (bei Erfolg) oder 400 Bad Request (bei Fehlern, z.B. E-Mail bereits vergeben, kein Nickname, etc.)
@@ -84,6 +84,28 @@ Response (JSON):
 
 **GET** /api/user/me (Testendpunkt)  
 → Gibt "Hello {username}!" zurück, wenn der JWT-Token korrekt ist, ansonsten 401 Unauthorized
+
+
+## Workout 
+**POST** /api/workouts/create
+
+Request (JSON):
+```json
+{
+"workoutName": "PushDay"
+}
+```
+
+Response: 201 Created (bei Erfolg) oder 400 Bad Request (bei Fehlern, z.B. kein Name angegeben, etc.)
+
+```json
+{
+    "id": 2,
+    "workoutEntries": [],
+    "workoutName": "PushDay"
+}
+```
+
 
 
 ## Geplante Features

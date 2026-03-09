@@ -66,4 +66,11 @@ public class WorkoutEntryEntity {
         setEntryEntity.setWorkoutEntry(this);
         this.sets.add(setEntryEntity);
     }
+
+    public void addSetEntry(SetEntryEntity set) {
+        sets.add(set);
+        set.setWorkoutEntry(this);
+    }
+
+
 }
