@@ -28,6 +28,7 @@ public class WorkoutService {
     public WorkoutEntity createWorkout(CreateWorkoutRequest request) {
         WorkoutEntity workout = new WorkoutEntity();
         workout.setWorkoutName(request.getWorkoutName());
+        workoutRepository.save(workout);
         return workout;
     }
 
