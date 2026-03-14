@@ -48,6 +48,12 @@ public class WorkoutService {
         return setEntry;
     }
 
+    public void addExerciseToWorkout(Long id, String exerciseName) {
+
+    }
+
+
+
     public WorkoutEntity updateWorkout(WorkoutEntity workout) {
         return workoutRepository.save(workout);
     }
