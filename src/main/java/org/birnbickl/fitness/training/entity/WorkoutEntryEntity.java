@@ -12,7 +12,7 @@ public class WorkoutEntryEntity {
     @GeneratedValue
     private long id;
 
-
+    private String ExerciseName;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "exercise_id")
@@ -34,6 +34,14 @@ public class WorkoutEntryEntity {
 
     public long getId() {
         return id;
+    }
+
+    public String getExerciseName() {
+        return ExerciseName;
+    }
+
+    public void setExerciseName(String exerciseName) {
+        this.ExerciseName = exerciseName;
     }
 
     public ExerciseEntity getExercise() {
