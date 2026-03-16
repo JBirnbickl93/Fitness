@@ -14,6 +14,10 @@ public class ExerciseEntity {
     protected ExerciseEntity() {
     }
 
+    public ExerciseEntity(String exerciseName) {
+        this.exerciseName = exerciseName;
+    }
+
     public Long getId() {
         return id;
     }
