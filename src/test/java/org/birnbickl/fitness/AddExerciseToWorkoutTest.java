@@ -1,7 +1,9 @@
 package org.birnbickl.fitness;
 
 import jakarta.transaction.Transactional;
+import org.birnbickl.fitness.training.entity.ExerciseEntity;
 import org.birnbickl.fitness.training.entity.WorkoutEntity;
+import org.birnbickl.fitness.training.repository.ExerciseRepository;
 import org.birnbickl.fitness.training.repository.WorkoutEntryRepository;
 import org.birnbickl.fitness.training.repository.WorkoutRepository;
 import org.birnbickl.fitness.training.service.WorkoutService;
@@ -21,6 +23,8 @@ public class AddExerciseToWorkoutTest {
     private WorkoutRepository workoutRepository;
     @Autowired
     private WorkoutService workoutService;
+    @Autowired
+    private ExerciseRepository exerciseRepository;
 
     @Test
     public void shouldAddExerciseToWorkout() {
@@ -31,6 +35,9 @@ public class AddExerciseToWorkoutTest {
         WorkoutEntity savedWorkout = workoutRepository.save(workout);
 
         // Übung hinzufügen
+        ExerciseEntity exercise = new ExerciseEntity("Bench Press");
+        exerciseRepository.save(exercise);
+
         workoutService.addExerciseToWorkout(1L, "Bench Press");
 
         // Überprüfung
@@ -38,6 +45,6 @@ public class AddExerciseToWorkoutTest {
                 .orElseThrow();
 
         assertEquals(1, updatedWorkout.getWorkoutEntries().size());
-        assertEquals("Bench Press", updatedWorkout.getWorkoutEntries().get(0).getExerciseName());
+        assertEquals("Bench Press", updatedWorkout.getWorkoutEntries().get(0).getExercise().getExerciseName());
     }
 }

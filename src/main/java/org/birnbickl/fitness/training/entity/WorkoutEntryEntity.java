@@ -30,6 +30,7 @@ public class WorkoutEntryEntity {
 
     public WorkoutEntryEntity(ExerciseEntity exercise) {
         this.exercise = exercise;
+
     }
 
     public long getId() {

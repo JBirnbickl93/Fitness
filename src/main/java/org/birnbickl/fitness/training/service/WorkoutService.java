@@ -4,9 +4,11 @@ import org.birnbickl.fitness.errorhandling.WorkoutNotFoundException;
 import org.birnbickl.fitness.training.dto.request.CreateSetRequest;
 import org.birnbickl.fitness.training.dto.request.CreateWorkoutRequest;
 import org.birnbickl.fitness.training.dto.response.WorkoutResponse;
+import org.birnbickl.fitness.training.entity.ExerciseEntity;
 import org.birnbickl.fitness.training.entity.SetEntryEntity;
 import org.birnbickl.fitness.training.entity.WorkoutEntity;
 import org.birnbickl.fitness.training.entity.WorkoutEntryEntity;
+import org.birnbickl.fitness.training.repository.ExerciseRepository;
 import org.birnbickl.fitness.training.repository.WorkoutEntryRepository;
 import org.birnbickl.fitness.training.repository.WorkoutRepository;
 import org.springframework.stereotype.Service;
@@ -19,10 +21,12 @@ public class WorkoutService {
 
     private final WorkoutRepository workoutRepository;
     private final WorkoutEntryRepository workoutEntryRepository;
+    private final ExerciseRepository exerciseRepository;
 
-    public WorkoutService(WorkoutRepository workoutRepository, WorkoutEntryRepository workoutEntryRepository) {
+    public WorkoutService(WorkoutRepository workoutRepository, WorkoutEntryRepository workoutEntryRepository, ExerciseRepository exerciseRepository) {
         this.workoutRepository = workoutRepository;
         this.workoutEntryRepository = workoutEntryRepository;
+        this.exerciseRepository = exerciseRepository;
     }
 
     public WorkoutEntity createWorkout(CreateWorkoutRequest request) {
@@ -49,7 +53,17 @@ public class WorkoutService {
     }
 
     public void addExerciseToWorkout(Long id, String exerciseName) {
+        WorkoutEntity workout = workoutRepository.findById(id)
+                .orElseThrow(() -> new WorkoutNotFoundException("Workout wurde nicht gefunden!"));
 
+        ExerciseEntity exercise = exerciseRepository.findByExerciseName(exerciseName)
+                .orElseThrow();
+
+        WorkoutEntryEntity workoutEntry = new WorkoutEntryEntity(exercise);
+        workoutEntry.setWorkout(workout);
+        workout.getWorkoutEntries().add(workoutEntry);
+
+        workoutRepository.save(workout);
     }
 
 
