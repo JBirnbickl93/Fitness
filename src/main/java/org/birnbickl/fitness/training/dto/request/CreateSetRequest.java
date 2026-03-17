@@ -16,6 +16,12 @@ public class CreateSetRequest {
     public CreateSetRequest() {
     }
 
+    public CreateSetRequest(int setNumber, int repetitions, double weight) {
+        this.setNumber = setNumber;
+        this.repetitions = repetitions;
+        this.weight = weight;
+    }
+
     public int getSetNumber() {
         return setNumber;
     }
