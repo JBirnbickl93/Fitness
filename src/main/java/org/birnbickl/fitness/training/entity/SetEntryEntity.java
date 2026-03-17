@@ -58,4 +58,8 @@ public class SetEntryEntity {
     public void setWeight(double weight) {
         this.weight = weight;
     }
+
+    public Long getId() {
+        return id;
+    }
 }

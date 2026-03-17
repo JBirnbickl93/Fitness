@@ -3,6 +3,7 @@ package org.birnbickl.fitness.training.entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -80,6 +81,7 @@ public class WorkoutEntryEntity {
         sets.add(set);
         set.setWorkoutEntry(this);
     }
+
 
 
 }
