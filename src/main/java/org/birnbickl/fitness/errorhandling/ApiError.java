@@ -6,10 +6,10 @@ import java.util.List;
 public class ApiError {
 
 
-    private LocalDateTime timestamp;
-    private String message;
-    private int status;
-    private List<String> details;
+    private final LocalDateTime timestamp;
+    private final String message;
+    private final int status;
+    private final List<String> details;
 
     public ApiError(LocalDateTime timestamp, String message, int status, List<String> details) {
         this.timestamp = timestamp;
@@ -22,36 +22,16 @@ public class ApiError {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public String getMessage() {
         return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public int getStatus() {
         return status;
     }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
     public List<String> getDetails() {
         return details;
     }
-
-    public void setDetails(List<String> details) {
-        this.details = details;
-    }
-
-
-
 
 }
 
