@@ -24,6 +24,7 @@ export class LoginFormComponent {
 
   email: string = '';
   password: string = '';
+  loginError: string = '';
 
   protected login(): void {
     this.http.post<{ token: string }>(
@@ -39,10 +40,9 @@ export class LoginFormComponent {
         this.router.navigate(['/dashboard']);
       },
       error: error => {
-        console.log('Login failed.', error);
+        this.loginError = 'Email or password is incorrect.';
       }
     })
 
   }
 }
-  // TODO: EventEmitter for login action
