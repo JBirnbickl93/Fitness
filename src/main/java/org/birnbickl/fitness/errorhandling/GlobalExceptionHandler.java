@@ -75,7 +75,7 @@ public class GlobalExceptionHandler {
 
     // Exception, bei falschen LoginDaten
     @ExceptionHandler
-    public ResponseEntity<ApiError> invalidCredentialsException (InvalidParameterException exception) {
+    public ResponseEntity<ApiError> invalidCredentialsException (InvalidCredentialsException exception) {
         List<String> errors = List.of(exception.getMessage());
         ApiError apiError = new ApiError(LocalDateTime.now(), "Invalid credentials.", HttpStatus.BAD_REQUEST.value(), errors);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
