@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill">
+  <mat-label>Email</mat-label>
+  <input matInput placeholder="Enter your email" [(ngModel)]="email" required email />
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Password</mat-label>
+  <input matInput placeholder="Enter your password" [(ngModel)]="password" type="password" required />
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="login()">Login</button>
