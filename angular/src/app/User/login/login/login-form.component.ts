@@ -3,7 +3,7 @@ import {MatFormField, MatInputModule} from '@angular/material/input';
 import {Router} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-login-component',
@@ -19,7 +19,7 @@ import {HttpClient} from '@angular/common/http';
 export class LoginFormComponent {
 
   constructor(private router: Router,
-              private http: HttpClient) {
+              private authService: AuthService,) {
   }
 
   email: string = '';
@@ -27,22 +27,15 @@ export class LoginFormComponent {
   loginError: string = '';
 
   protected login(): void {
-    this.http.post<{ token: string }>(
-      '/api/auth/login',
-      {
-        email: this.email,
-        password: this.password
-      }
-    ).subscribe({
+    this.authService.login(this.email, this.password)
+      .subscribe({
       next: response => {
-        console.log('Login successful');
-        console.log(response.token);
+        this.authService.saveToken(response.token);
         this.router.navigate(['/dashboard']);
       },
       error: error => {
         this.loginError = 'Email or password is incorrect.';
       }
     })
-
   }
 }

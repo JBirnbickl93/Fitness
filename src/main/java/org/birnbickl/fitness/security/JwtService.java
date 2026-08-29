@@ -2,6 +2,7 @@ package org.birnbickl.fitness.security;
 
 
 
+import io.jsonwebtoken.JwtException;
 import org.birnbickl.fitness.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -52,10 +53,17 @@ public class JwtService {
         return extractAllClaims(token).getSubject();
     }
 
-    public Boolean isTokenValid(String token, UserDetails userDetails) {
-        final String emailFromToken = extractEmail(token);
-        final boolean tokenNotExpired = extractAllClaims(token).getExpiration().after(new Date());
-        return (emailFromToken.equals(userDetails.getUsername()) && tokenNotExpired);
+    public boolean isTokenValid(String token, UserDetails userDetails) {
+        try {
+            Claims claims = extractAllClaims(token);
+            String emailFromToken = claims.getSubject();
+            Date expiration = claims.getExpiration();
+            return emailFromToken.equals(userDetails.getUsername())
+                    && expiration.after(new Date());
+        }
+        catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
     }
 
 
