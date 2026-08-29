@@ -30,8 +30,8 @@ public class WorkoutController {
     }
 
     @PostMapping("/entries/{entryId}/addSet")
-    public ResponseEntity<SetEntryEntity> addSetToWorkoutEntry(@PathVariable Long id, @RequestBody CreateSetRequest request) {
-        SetEntryEntity createdSet = workoutService.addSetToWorkoutEntry(id, request);
+    public ResponseEntity<SetEntryEntity> addSetToWorkoutEntry(@PathVariable Long entryId, @RequestBody CreateSetRequest request) {
+        SetEntryEntity createdSet = workoutService.addSetToWorkoutEntry (entryId, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSet);
     }
 
