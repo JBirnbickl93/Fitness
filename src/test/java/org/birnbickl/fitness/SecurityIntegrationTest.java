@@ -3,7 +3,6 @@ package org.birnbickl.fitness;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.birnbickl.fitness.security.JwtService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ public class SecurityIntegrationTest {
 
     @Autowired MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final JwtService jwtService = new JwtService();
 
     @Test
     void register_login_and_access_protected_endpoint() throws Exception {
