@@ -12,9 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -23,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class AuthFlowIT {
+public class SecurityIntegrationTest {
 
     @Autowired MockMvc mockMvc;
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -69,6 +66,20 @@ public class AuthFlowIT {
                 .andExpect(status().isOk())
                 .andExpect(content().string(Matchers.containsString("Hello")));
 
+        // 5. Zugriff auf geschützten Endpunkt mit malformed Token, sollte 401 Unauthorized zurückgeben
+        String malformedToken = "abc.def.ghi";
+        mockMvc.perform(get("/api/user/me")
+                .header("Authorization", "Bearer " + malformedToken))
+                .andExpect(status().isUnauthorized());
+
+        // 6. Zugriff auf geschützten Endpunkt mit manipuliertem Token, sollte 401 Unauthorized zurückgeben
+        char lastChar = token.charAt(token.length() - 1);
+        char replacement = lastChar == 'A' ? 'B' : 'A';
+        String manipulatedToken = token.substring(0, token.length() - 1) + replacement;
+
+        mockMvc.perform(get("/api/user/me")
+                .header("Authorization", "Bearer" + manipulatedToken))
+                .andExpect(status().isUnauthorized());
     }
 
 }
