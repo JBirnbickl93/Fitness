@@ -44,7 +44,7 @@ jobs:
           run: npm ci
 
         - name: Run frontend tests
-          run: npm test -- --watch=false
+          run: npm test -- --watch=false --browsers=ChromeHeadless
 
         - name: Build frontend
           run: npm run build
