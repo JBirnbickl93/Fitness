@@ -6,12 +6,13 @@ import {shareReplay} from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient, private httpInterceptor: HttpInterceptor) {
+  private apiUrl = 'api/auth'
+  constructor(private http: HttpClient) {
   }
 
   login(email: string, password: string) {
     return this.http.post<LoginResponse>(
-      `api/auth/login`,
+      this.apiUrl + `/login`,
       {email, password})
       .pipe(shareReplay(1))
   }
