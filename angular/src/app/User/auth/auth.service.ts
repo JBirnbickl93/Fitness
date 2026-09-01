@@ -25,7 +25,8 @@ export class AuthService {
     return localStorage.getItem('token')
   }
 
-  isAuthenticated(token: string) {
+  // Prüft bisher nur, ob ein Token im Local Storage ist, nicht, ob er gültig ist (JWT-Filter Backend)
+  isAuthenticated() : boolean {
     return !!localStorage.getItem('token');
   }
 
