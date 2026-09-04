@@ -1,5 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpInterceptorFn, provideHttpClient, HttpRequest, HttpResponse, HttpHandlerFn} from '@angular/common/http';
+import {
+  HttpInterceptorFn,
+  provideHttpClient,
+  HttpRequest,
+  HttpResponse,
+  HttpHandlerFn,
+  HttpClient, withInterceptors
+} from '@angular/common/http';
 import { authInterceptor } from './auth.interceptor';
 import {AuthService} from './auth.service';
 import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
@@ -11,21 +18,23 @@ describe('authInterceptor', () => {
 
   let authService: AuthService;
   let httpMock: HttpTestingController
+  let http: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(),
+      providers: [provideHttpClient(withInterceptors([authInterceptor])),
       provideHttpClientTesting()]
     });
     authService = TestBed.inject(AuthService);
     httpMock = TestBed.inject(HttpTestingController);
+    http = TestBed.inject(HttpClient);
   });
 
   it('should forward the user to auth-paths', () => {
-    authService.login('test@test.de', 'password');
+    http.post('api/auth/login', {}).subscribe();
     const req = httpMock.expectOne('/api/auth/login');
     expect(req.request.headers.has('Authorization')).toBeFalse();
-    req.flush({token: 'fake-token'});
+    req.flush({});
   });
 
 
