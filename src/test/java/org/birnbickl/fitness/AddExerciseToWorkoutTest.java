@@ -38,13 +38,13 @@ public class AddExerciseToWorkoutTest {
         ExerciseEntity exercise = new ExerciseEntity("Bench Press");
         exerciseRepository.save(exercise);
 
-        workoutService.addExerciseToWorkout(1L, "Bench Press");
+        workoutService.addExerciseToWorkout(savedWorkout.getId(), "Bench Press");
 
         // Überprüfung
         WorkoutEntity updatedWorkout = workoutRepository.findById(savedWorkout.getId())
                 .orElseThrow();
 
         assertEquals(1, updatedWorkout.getWorkoutEntries().size());
-        assertEquals("Bench Press", updatedWorkout.getWorkoutEntries().get(0).getExercise().getExerciseName());
+        assertEquals("Bench Press", updatedWorkout.getWorkoutEntries().getFirst().getExercise().getExerciseName());
     }
 }
