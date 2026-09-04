@@ -30,8 +30,8 @@ describe('authInterceptor', () => {
     http = TestBed.inject(HttpClient);
   });
 
-  it('should forward the user to auth-paths', () => {
-    http.post('api/auth/login', {}).subscribe();
+  it('should not add an Authorization header to auth requests', () => {
+    http.post('/api/auth/login', {}).subscribe();
     const req = httpMock.expectOne('/api/auth/login');
     expect(req.request.headers.has('Authorization')).toBeFalse();
     req.flush({});
