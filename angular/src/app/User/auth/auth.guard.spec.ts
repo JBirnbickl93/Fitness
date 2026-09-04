@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import {CanActivateFn, provideRouter} from '@angular/router';
 
 import { authGuard } from './auth.guard';
 import {provideHttpClient} from '@angular/common/http';
@@ -16,7 +16,8 @@ describe('authGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(),
-      provideHttpClientTesting()]
+      provideHttpClientTesting(),
+      provideRouter([])]
     });
     authService = TestBed.inject(AuthService);
     router = TestBed.inject(Router);

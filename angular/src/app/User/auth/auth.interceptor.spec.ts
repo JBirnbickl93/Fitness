@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpInterceptorFn, provideHttpClient, HttpRequest, HttpResponse, HttpHandlerFn} from '@angular/common/http';
 import { authInterceptor } from './auth.interceptor';
 import {AuthService} from './auth.service';
-import { provideHttpClientTesting} from '@angular/common/http/testing';
+import {HttpTestingController, provideHttpClientTesting} from '@angular/common/http/testing';
 import {of} from 'rxjs';
 
 describe('authInterceptor', () => {
@@ -10,6 +10,7 @@ describe('authInterceptor', () => {
     TestBed.runInInjectionContext(() => authInterceptor(req, next));
 
   let authService: AuthService;
+  let httpMock: HttpTestingController
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -17,7 +18,17 @@ describe('authInterceptor', () => {
       provideHttpClientTesting()]
     });
     authService = TestBed.inject(AuthService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
+
+  it('should forward the user to auth-paths', () => {
+    authService.login('test@test.de', 'password');
+    const req = httpMock.expectOne('/api/auth/login');
+    expect(req.request.headers.has('Authorization')).toBeFalse();
+    req.flush({token: 'fake-token'});
+  });
+
+
 
   it('should add an Authorization header if a token is present', () => {
     spyOn(authService, 'getToken').and.returnValue('abc123');
