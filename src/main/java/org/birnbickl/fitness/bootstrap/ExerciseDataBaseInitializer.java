@@ -14,8 +14,8 @@ public class ExerciseDataBaseInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        ExerciseEntity benchPress = new ExerciseEntity("Bench Press");
-        exerciseRepository.save(benchPress);
+        ExerciseEntity hammerCurl = new ExerciseEntity("Hammer Curl");
+        exerciseRepository.save(hammerCurl);
         ExerciseEntity deadLift = new ExerciseEntity("Dead Lift");
         exerciseRepository.save(deadLift);
         ExerciseEntity LegPress = new ExerciseEntity("Leg Press");
