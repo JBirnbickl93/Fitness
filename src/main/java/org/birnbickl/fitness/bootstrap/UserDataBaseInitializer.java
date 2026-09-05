@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 public class UserDataBaseInitializer implements CommandLineRunner {
 
     @Autowired
-    UserRepository userRepository;
-    @Autowired
     private UserService userService;
 
     @Override
