@@ -19,6 +19,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
        return http.csrf(csrf-> csrf.disable())
+               .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                .exceptionHandling(ex ->
                        ex.authenticationEntryPoint((request, response, authException)
@@ -27,6 +28,7 @@ public class WebSecurityConfig {
                -> response.sendError(403, "Forbidden")))
                .authorizeHttpRequests((auth-> auth
                        .requestMatchers("/api/auth/**").permitAll()
+                       .requestMatchers("/h2-console/**").permitAll()
                        .requestMatchers("/api/user/**").authenticated()
                        .requestMatchers("/api/workout/**").authenticated()
                        .anyRequest().authenticated()))
