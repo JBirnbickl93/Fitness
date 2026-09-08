@@ -33,10 +33,7 @@ public class GlobalExceptionHandler {
 
 
     // Exception, für nicht auffindbares Element
-    @ExceptionHandler ({
-            WorkoutNotFoundException.class,
-            UsernameNotFoundException.class
-    })
+    @ExceptionHandler ({WorkoutNotFoundException.class})
     public ResponseEntity<ApiError> handleNotFound (NoSuchElementException exception) {
         List<String> errors = List.of("The requested object was not found.");
         ApiError apiError = new ApiError(LocalDateTime.now(), "Not found.", HttpStatus.NOT_FOUND.value(), errors);
