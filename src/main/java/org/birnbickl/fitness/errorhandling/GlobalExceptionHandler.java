@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -32,7 +33,7 @@ public class GlobalExceptionHandler {
 
 
     // Exception, für nicht auffindbares Element
-    @ExceptionHandler
+    @ExceptionHandler ({WorkoutNotFoundException.class})
     public ResponseEntity<ApiError> handleNotFound (NoSuchElementException exception) {
         List<String> errors = List.of("The requested object was not found.");
         ApiError apiError = new ApiError(LocalDateTime.now(), "Not found.", HttpStatus.NOT_FOUND.value(), errors);
