@@ -1,6 +1,8 @@
 ![CI](https://github.com/JBirnbickl93/fitness/actions/workflows/ci.yml/badge.svg)
 
+<img src="angular/public/logo.png" alt="FitnessApp Logo" width="200">
 
+# **Brains. Gains. Repeat.**
 ___
 ## ** WORK IN PROGRESS **
 ** Subject to change, not final yet. **
@@ -19,7 +21,7 @@ ___
 
 ## Technologien
 - **Backend**: Java, Spring Boot (REST API)
-- **Frontend**: noch offen (z.B. React, Angular, Flutter)
+- **Frontend**: Angular
 - **Datenbank**: PostgreSQL oder MySQL
 - **Build-Tool**: Maven
 - **Versionierung**: Git
