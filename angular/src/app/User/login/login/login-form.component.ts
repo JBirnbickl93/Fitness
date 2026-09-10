@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../auth/auth.service';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-login-component',
@@ -12,7 +13,8 @@ import {AuthService} from '../../auth/auth.service';
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgOptimizedImage
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
