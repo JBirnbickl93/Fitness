@@ -43,4 +43,22 @@ describe('AuthService', () => {
       token: 'abc123'
     });
   });
+
+  it('should be an unauthorized request with invalid credentials', () => {
+    service.login('test@test.de', 'test').subscribe({
+      next:() => fail('Expected request to fail'),
+      error: error => {
+        expect(error.status).toBe(401);
+      }
+    });
+
+    const request = httpMock.expectOne('/api/auth/login');
+    expect(request.request.method).toBe('POST');
+    request.flush({},
+      {
+        status: 401,
+        statusText: 'Unauthorized'
+      });
+  });
+
 });

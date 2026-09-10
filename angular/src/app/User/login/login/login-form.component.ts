@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {MatFormField, MatInputModule} from '@angular/material/input';
 import {Router} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../auth/auth.service';
 
 @Component({
@@ -11,7 +11,8 @@ import {AuthService} from '../../auth/auth.service';
     MatFormField,
     MatInputModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
@@ -22,18 +23,31 @@ export class LoginFormComponent {
               private authService: AuthService,) {
   }
 
-  email: string = '';
-  password: string = '';
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  })
+
   loginError: string = '';
 
-  protected login(): void {
-    this.authService.login(this.email, this.password)
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    const email = this.loginForm.controls.email.value;
+    const password = this.loginForm.controls.password.value;
+
+    if (!email || !password) {
+      return;
+    }
+    this.authService.login(email, password)
       .subscribe({
       next: response => {
         this.authService.saveToken(response.token);
         this.router.navigate(['/dashboard']);
       },
-      error: error => {
+      error: () => {
         this.loginError = 'Email or password is incorrect.';
       }
     })
