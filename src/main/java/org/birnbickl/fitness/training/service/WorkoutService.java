@@ -30,11 +30,11 @@ public class WorkoutService {
         this.exerciseRepository = exerciseRepository;
     }
 
-    public WorkoutEntity createWorkout(CreateWorkoutData request) {
+    public WorkoutData createWorkout(CreateWorkoutData request) {
         WorkoutEntity workout = new WorkoutEntity();
         workout.setWorkoutName(request.getWorkoutName());
-        workoutRepository.save(workout);
-        return workout;
+        WorkoutEntity savedWorkout = workoutRepository.save(workout);
+        return new WorkoutData(savedWorkout.getId(), savedWorkout.getWorkoutName());
     }
 
     public SetEntryData addSetToWorkoutEntry(Long entryId, CreateSetEntryData request) {

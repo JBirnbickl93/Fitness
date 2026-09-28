@@ -10,6 +10,10 @@ public class CreateWorkoutData {
     public CreateWorkoutData() {
     }
 
+    public CreateWorkoutData(String workoutName) {
+        this.workoutName = workoutName;
+    }
+
     public String getWorkoutName() {
         return workoutName;
     }
