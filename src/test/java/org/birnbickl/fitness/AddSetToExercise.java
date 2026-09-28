@@ -2,6 +2,7 @@ package org.birnbickl.fitness;
 
 
 import jakarta.transaction.Transactional;
+import org.birnbickl.fitness.training.dto.request.CreateSetEntryData;
 import org.birnbickl.fitness.training.entity.ExerciseEntity;
 import org.birnbickl.fitness.training.entity.SetEntryEntity;
 import org.birnbickl.fitness.training.entity.WorkoutEntity;
@@ -49,7 +50,7 @@ public class AddSetToExercise {
 
         // Set zu Übung hinzufügen
 
-        workoutService.addSetToWorkoutEntry(workoutEntry.getId(), new org.birnbickl.fitness.training.dto.request.CreateSetRequest(1, 10, 100.0));
+        workoutService.addSetToWorkoutEntry(workoutEntry.getId(), new CreateSetEntryData(1, 10, 100.0));
 
 
         // Überprüfung

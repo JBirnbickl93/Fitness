@@ -1,13 +1,13 @@
 package org.birnbickl.fitness.training.dto.response;
 
 import jakarta.validation.constraints.NotBlank;
-public class WorkoutResponse {
+public class WorkoutData {
 
     private Long id;
     @NotBlank(message = "Workout-Name darf nicht leer sein!")
     private String workoutName;
 
-    public WorkoutResponse(Long id, String workoutName) {
+    public WorkoutData(Long id, String workoutName) {
         this.id = id;
         this.workoutName = workoutName;
     }

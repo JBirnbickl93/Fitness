@@ -3,7 +3,7 @@ package org.birnbickl.fitness.user.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UserLoginRequest {
+public class UserLoginData {
 
     @NotBlank(message ="Email darf nicht leer sein!")
     private String email;
@@ -12,12 +12,12 @@ public class UserLoginRequest {
     @Size(min = 8, message = "Passwort muss mindestens 8 Zeichen lang sein!")
     private String password;
 
-    public UserLoginRequest(String email, String password, String Username) {
+    public UserLoginData(String email, String password, String Username) {
         this.email = email;
         this.password = password;
     }
 
-    public UserLoginRequest() {}
+    public UserLoginData() {}
 
     public String getEmail() {
         return email;

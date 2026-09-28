@@ -1,10 +1,10 @@
 package org.birnbickl.fitness.training.controller;
 
 import jakarta.validation.Valid;
-import org.birnbickl.fitness.training.dto.request.CreateSetRequest;
-import org.birnbickl.fitness.training.dto.request.CreateWorkoutRequest;
-import org.birnbickl.fitness.training.dto.response.WorkoutResponse;
-import org.birnbickl.fitness.training.entity.SetEntryEntity;
+import org.birnbickl.fitness.training.dto.request.CreateSetEntryData;
+import org.birnbickl.fitness.training.dto.request.CreateWorkoutData;
+import org.birnbickl.fitness.training.dto.request.SetEntryData;
+import org.birnbickl.fitness.training.dto.response.WorkoutData;
 import org.birnbickl.fitness.training.entity.WorkoutEntity;
 import org.birnbickl.fitness.training.service.WorkoutService;
 import org.springframework.http.HttpStatus;
@@ -24,26 +24,26 @@ public class WorkoutController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<WorkoutEntity> createWorkout(@Valid @RequestBody CreateWorkoutRequest request) {
+    public ResponseEntity<WorkoutEntity> createWorkout(@Valid @RequestBody CreateWorkoutData request) {
         WorkoutEntity newWorkout = workoutService.createWorkout(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(newWorkout);
     }
 
     @PostMapping("/entries/{entryId}/addSet")
-    public ResponseEntity<SetEntryEntity> addSetToWorkoutEntry(@PathVariable Long entryId, @Valid @RequestBody CreateSetRequest request) {
-        SetEntryEntity createdSet = workoutService.addSetToWorkoutEntry (entryId, request);
+    public ResponseEntity<SetEntryData> addSetToWorkoutEntry(@PathVariable Long entryId, @Valid @RequestBody CreateSetEntryData request) {
+        SetEntryData createdSet = workoutService.addSetToWorkoutEntry (entryId, request);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSet);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<WorkoutResponse>> getAllWorkouts() {
-        List<WorkoutResponse> workouts = workoutService.getAllWorkouts();
+    public ResponseEntity<List<WorkoutData>> getAllWorkouts() {
+        List<WorkoutData> workouts = workoutService.getAllWorkouts();
         return ResponseEntity.ok(workouts);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<WorkoutResponse> getSingleWorkoutById(@PathVariable Long id) {
-        WorkoutResponse workout = workoutService.getSingleWorkoutById(id);
+    public ResponseEntity<WorkoutData> getSingleWorkoutById(@PathVariable Long id) {
+        WorkoutData workout = workoutService.getSingleWorkoutById(id);
         return ResponseEntity.ok(workout);
     }
 }

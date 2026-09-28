@@ -2,12 +2,12 @@ package org.birnbickl.fitness.training.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class CreateWorkoutRequest {
+public class CreateWorkoutData {
 
     @NotBlank(message ="Workout-Name darf nicht leer sein!")
     private String workoutName;
 
-    public CreateWorkoutRequest() {
+    public CreateWorkoutData() {
     }
 
     public String getWorkoutName() {

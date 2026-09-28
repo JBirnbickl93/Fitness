@@ -11,7 +11,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return this.http.post<LoginResponse>(
+    return this.http.post<LoginData>(
       this.apiUrl + `/login`,
       {email, password})
       .pipe(shareReplay(1))
@@ -32,6 +32,6 @@ export class AuthService {
 
 }
 
-interface LoginResponse {
+interface LoginData {
   token: string;
 }

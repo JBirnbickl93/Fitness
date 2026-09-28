@@ -3,7 +3,7 @@ package org.birnbickl.fitness.user.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class UserRegistrationRequest {
+public class UserRegistrationData {
 
     @NotBlank(message ="Email darf nicht leer sein!")
     private String email;
@@ -16,13 +16,13 @@ public class UserRegistrationRequest {
     private String username;
 
 
-    public UserRegistrationRequest(String email, String password, String username) {
+    public UserRegistrationData(String email, String password, String username) {
         this.email = email;
         this.password = password;
         this.username = username;
     }
 
-    public UserRegistrationRequest() {}
+    public UserRegistrationData() {}
 
     public String getEmail() {
         return email;

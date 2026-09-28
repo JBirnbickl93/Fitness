@@ -2,7 +2,7 @@ package org.birnbickl.fitness.training.dto.request;
 
 import jakarta.validation.constraints.Min;
 
-public class CreateSetRequest {
+public class CreateSetEntryData {
 
     @Min(value=1, message = "Satznummer muss mindestens 1 sein!")
     private int setNumber;
@@ -13,10 +13,10 @@ public class CreateSetRequest {
     @Min(value=0, message = "Gewicht muss positiv sein!")
     private double weight;
 
-    public CreateSetRequest() {
+    public CreateSetEntryData() {
     }
 
-    public CreateSetRequest(int setNumber, int repetitions, double weight) {
+    public CreateSetEntryData(int setNumber, int repetitions, double weight) {
         this.setNumber = setNumber;
         this.repetitions = repetitions;
         this.weight = weight;
